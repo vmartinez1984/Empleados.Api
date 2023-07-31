@@ -29,7 +29,10 @@ namespace Empleados.Api.Services.Implementaciones
 
         public async Task<List<Empleado>> GetAll()
         {
-            return await _context.Empleados.ToListAsync();
+            return await _context
+                .Empleados
+                .Include(x=> x.Departamento)
+                .ToListAsync();
         }
 
         public async Task<Empleado> GetById(int id)
